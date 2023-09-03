@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+        /*css reset*/
+        margin: 0; 
+        padding: 0;
+        background-color: rgb(28, 28, 28);
+        color: aliceblue;
+    }
+      nav{
+        background-color:rgb(174, 171, 171);
+        width: 100%;
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+       
+    }
+    .but{
+        margin: auto 10px;
+        display: flex;
+        font-size: 15px;
+        font-weight: bolder;
+        align-items: center;
+        padding: 20px;
+        height: 30px;
+        width: 150px;
+        border-radius: 10px;
+    }
+    .but1{
+        background-color: rgb(196, 191, 191);
+    }
+    .but2{
+        background-color: rgb(217, 225, 233);
+       
+    }
+    .container>h3{
+        text-align: center;
+    }
+    .con{
+        background-color: gray;
+        width: 50vw;
+        padding:  50px ;
+        padding-top: 10px;
+        height: fit-content;
+        border-radius: 30px;
+        margin: auto;
+        text-align: center;
+    }
+    h5{
+        margin:3px;
+        font-size: 20px;
+    }  
+    h1{
+        font-size: 40px;
+    }
+    form>input{
+        width: 220px;
+        height: 35px;
+        border-radius: 10px;
+        border-color: aliceblue;
+        font-size: 20px;
+    }
+    form>#sub{
+        display: block;
+        margin: 30px auto;
+        font-weight: bolder;
+        padding-top: 14px;
+        padding-bottom: 22px;
+        height: 10px;
+        width: 150px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        color: aliceblue;
+        background-color: black;
+    }
+    #sub2{
+        display: block;
+        margin: 30px auto;
+        font-weight: bolder;
+        padding-top: 14px;
+        padding-bottom: 22px;
+        height: 10px;
+        width: 150px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        color: aliceblue;
+        background-color: red; 
+    }
+    #pre,.last{
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+        padding: 5px;
+    }
+    .hide{
+        visibility:hidden;
+    }
+    @media (max-width:500px) {
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+       
+    }
+    a{
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <button class="but but1"><a href="#">Home</a></button>
+            <button class="but but2"><a href="./IndexMain.html">More Projects</a></button>
+            </nav>
+        </header>
+        <h3>Number Guessing Game</h3>
+                <div class="con">
+                    <h5>Try and Guess a random number between 1 and 100.</h5>
+                    <h5>You have 10 attempts to guess the right number.</h5>
+
+                    <h1>Guess a Number:</h1>
+                    <form id="formi">
+                        <input  type="text" id="takeNum">
+                    </form>
+                       <div class="count last">Guesses Remaining: <span id="countnum"></span></div>
+                 
+                    <div id="pre">Previous Guesses: </div>   
+                </div>
+                </div>
+     <script>
+        let form=document.querySelector("#formi");
+         let random=undefined;
+         form.insertAdjacentHTML('beforeend','<button id="sub">Submit Guess.</button>');
+         let submit=document.querySelector("#sub");
+         let inputs=document.getElementById("takeNum");
+         console.log(inputs.value);
+         let preguess=document.getElementById("pre");
+         let cont=document.querySelector(".count");
+         let count=document.getElementById("countnum");
+         let restart;
+        let n;
+
+        function Restart(){
+            document.querySelector("#sub2").remove();
+            form.insertAdjacentHTML('beforeend','<button id="sub">Submit Guess.</button>');
+            submit=document.querySelector("#sub");
+            Start();
+        }
+        function guess_compare(guess){
+            if(random==guess){
+                preguess.textContent="CONGRATULATIONS GUESS IS CORRECT!!";
+                count.textContent="";
+                cont.textContent="";
+               form.insertAdjacentHTML('beforeend' ,'<div id="sub2">Restart</div>');
+                restart=document.querySelector("#sub2");
+             document.querySelector("#sub").remove();
+              restart.addEventListener("click",function(){
+               inputs.value="";
+               preguess.textContent="Previous Guesses: ";
+               cont.textContent="Guesses Remaining: ";
+               Restart();
+              })
+            }
+           else if(n==1){
+                    count.textContent=0;
+                    preguess.textContent="SORRY TRY AGAIN!!";
+              count.textContent="";
+                cont.textContent="";
+               form.insertAdjacentHTML('beforeend' ,'<div id="sub2">Restart</div>');
+                restart=document.querySelector("#sub2");
+                submit.remove();
+              restart.addEventListener("click",function(){
+               inputs.value="";
+               preguess.textContent="Previous Guesses: ";
+               Restart();
+              })
+                }
+            else{
+                if(n<10)
+                preguess.textContent=preguess.textContent+", "+ inputs.value;
+            else
+            preguess.textContent=preguess.textContent+ inputs.value;
+
+                inputs.value="";
+                count.textContent=--n;
+                cont.textContent="Guesses Remaining: "+n;
+            }
+        }
+
+        function validateGuess(guess){
+            if(guess>= 1 && guess<=100 && guess!=="")
+            {
+
+                guess_compare(guess);
+
+            }
+        }
+        function Start(){
+
+           n=10;
+           count.textContent=n;
+           cont.textContent="Guesses Remaining: "+n;
+           random = Number.parseInt(Math.floor(Math.random() * 100) + 1);
+          //  console.log(random);
+            submit.addEventListener("click",function(e){
+                e.preventDefault();
+          let guess =(inputs.value);
+             validateGuess(guess);
+            })
+    }
+
+    Start();
+
+     </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose A Color</title>
+    <style>
+        body{
+            /*css reset*/
+            padding: 0px;
+            margin: 0px;
+            height: 100vh;
+        }
+        nav{
+            background-color:rgb(174, 171, 171);
+            width: 100%;
+            height: 10vh;
+            display: flex;
+            justify-content: center;
+           
+        }
+        .but{
+            margin: auto 10px;
+            display: flex;
+            font-size: 15px;
+            font-weight: bolder;
+            align-items: center;
+            padding: 20px;
+            height: 30px;
+            width: 150px;
+            border-radius: 10px;
+        }
+        .but1{
+            background-color: rgb(196, 191, 191);
+        }
+        .but2{
+            background-color: rgb(217, 225, 233);
+           
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        .box{
+            display: flex;
+            gap:10px;
+            justify-content: center;
+            align-items: center;
+            height: max-content;
+            padding: 3vw;
+            flex-wrap: wrap;
+        }
+        .box1{
+            height: 180px;
+            width: 180px;
+            margin: 10px;
+            background-color: grey;
+           border-radius: 20px;
+           border: 3px solid black;
+        }
+        .box2{
+            height: 180px;
+            width: 180px;
+            margin: 10px;
+            background-color: red;
+           border-radius: 20px;
+           border: 3px solid black;
+        } 
+        .box3{
+            height: 180px;
+            width: 180px;
+            margin: 10px;
+            background-color: blue;
+           border-radius: 20px;
+           border: 3px solid black;
+        } 
+        .box4{
+            height: 180px;
+            width: 180px;
+            margin: 10px;
+            background-color: yellow;
+           border-radius: 20px;
+           border: 3px solid black;
+        } 
+        .con{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            height: 80vh;
+        }
+        .con>h1{
+            position: relative;
+            top: 50px;
+        }
+        .con>h3{
+            font-size: 30px;
+            width: 550px;
+            height: 200px;
+            position: relative;
+            bottom: 50px;
+        }
+        h1{
+            padding: 2vh;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <nav>
+            <button class="but but1"><a href="#">Home</a></button>
+            <button class="but but2"><a href="./IndexMain.html">More Projects</a></button>
+        </nav>
+    </header>
+    <div class="con">
+        <h1>Color Scheme Switcher</h1>
+    <div class="box">
+        <div class="bo box1" id="box-1"></div>
+        <div class="bo box2" id="box-2"></div>
+        <div class="bo box3" id="box-3"></div>
+        <div class="bo box4" id="box-4"></div>
+    </div>
+    <h3>Choose your favourite background color out of this four by clicking the buttons</h3>
+</div>
+</div>
+
+   <script>
+      let len=document.getElementsByClassName("bo").length;
+      for(let i=0;i<len;i++){
+   let v=document.getElementsByClassName("bo")[i].addEventListener("click",Add)
+   
+   function Add(e)
+   {
+     if(e.target.id==="box-1")
+     {
+        document.body.style.backgroundColor=e.target.backgroundColor="gray";
+     }
+     else if(e.target.id==="box-2"){
+        document.body.style.backgroundColor="red";
+     }
+     else if(e.target.id==="box-3"){
+        document.body.style.backgroundColor="blue";
+     }
+     else if(e.target.id==="box-4"){
+        document.body.style.backgroundColor="yellow";
+     }
+   }
+}  
+   </script> 
+</body>
+</html>
